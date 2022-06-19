@@ -83,7 +83,7 @@ console.log(skillItems);
 
 skillItems.forEach((skill) => {
   skill.querySelector(".head").addEventListener("click", () => {
-    skill.querySelector(".items".classList.toggle(".show-items"));
+    skill.querySelector(".items").classList.toggle(".items.show-items");
   });
 });
 

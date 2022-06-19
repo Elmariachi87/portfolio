@@ -386,7 +386,7 @@ section.skills .skill .head .left {
 }
 
 /* For JS - show & hide */
-section.skills .container .skill .items.show-items {
+.items.show-items {
   display: block;
 }
 
