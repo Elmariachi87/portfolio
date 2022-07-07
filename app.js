@@ -79,7 +79,6 @@ readMoreBtn.addEventListener("click", () => {
 // Skills section - show / hide
 
 const skillItems = document.querySelectorAll("section.skills .skill");
-console.log(skillItems);
 
 skillItems.forEach((skill) => {
   skill.querySelector(".head").addEventListener("click", () => {
@@ -95,3 +94,28 @@ window.addEventListener("scroll", () => {
     // The 2nd parameter listens for the trigger
     .classList.toggle("show-box-shadow", window.scrollY > 100);
 });
+
+// Dark mode
+
+const darkModeBtn = document.querySelector("input[type='checkbox']");
+
+function switchTheme(event) {
+  console.log("dark mode initialised");
+  if (event.target.checked) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    // toggleDarkLightMode(true);
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
+    // toggleDarkLightMode(false);
+    localStorage.setItem("theme", "light");
+  }
+}
+
+// function toggleDarkLightMode(isDark) {
+//   isDark
+//     ? toggleIcon.children[1].classList.replace("fa-sun", "fa-moon")
+//     : toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
+// }
+
+darkModeBtn.addEventListener("change", switchTheme);

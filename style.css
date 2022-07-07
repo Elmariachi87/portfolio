@@ -1,14 +1,31 @@
 /* Root variables */
 
 :root {
-  --color-white: #f7f7ff;
-  --color-light: #dadae2;
+  --color-background: #f7f7ff;
+  --color-secondary-background: #dadae2;
   --color-dark: #525252;
   --color-dark-text: #495867;
   --color-primary: #fe5f55;
   --color-primary-light: #ffb3ae;
   --color-secondary: #bdd5ea;
   --color-tertiary: #577399;
+  --color-text-paragraph: #0c0c0c;
+  --color-whiteText: #f7f7ff;
+
+  --transition: all 300ms ease;
+}
+
+[data-theme="dark"] {
+  --color-background: #0c0c0c;
+  --color-secondary-background: #191f23;
+  --color-dark: #525252;
+  --color-dark-text: #8a9198;
+  --color-primary: #5e869c;
+  --color-primary-light: #c7dbe6;
+  --color-secondary: #bdd5ea;
+  --color-tertiary: #577399;
+  --color-text-paragraph: #e1dddd;
+  --color-whiteText: #f7f7ff;
 
   --transition: all 300ms ease;
 }
@@ -25,7 +42,7 @@
 
 ::-webkit-scrollbar {
   width: 10px;
-  background: var(--color-light);
+  background: var(--color-secondary-background);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -40,13 +57,10 @@ html {
 
 body,
 footer {
-  background: var(--color-white);
+  background: var(--color-background);
   font-family: "Montserrat", sans-serif;
   color: dark;
   max-width: 100vw;
-}
-
-body {
   overflow-x: hidden;
 }
 
@@ -91,7 +105,6 @@ section,
 footer {
   padding: 10rem 0 7rem;
   max-width: 100vw;
-  /* overflow-x: hidden; */
 }
 
 section h1 {
@@ -107,8 +120,7 @@ img {
 .btn {
   padding: 1.4rem 3.4rem;
   font-size: 1.1rem;
-  color: var(--color-dark-text);
-  background: var(--color-white);
+  background: var(--color-background);
   display: inline-block;
   margin: 2rem 0;
   transition: var(--transition);
@@ -116,7 +128,7 @@ img {
 
 .btn-primary {
   background: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
 .btn:hover {
@@ -124,16 +136,16 @@ img {
 }
 
 nav {
-  width: 100%;
+  width: 100vw;
   height: 5rem;
-  background: var(--color-white);
+  background: var(--color-background);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: fixed;
   z-index: 2;
-  border-bottom: 1px solid var(--color-light);
+  border-bottom: 1px solid var(--color-secondary-background);
 }
 
 nav.show-box-shadow {
@@ -147,6 +159,74 @@ nav .container {
   align-items: center;
   height: 100%;
 }
+
+/* Dark / light mode */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  top: 1.2rem;
+  left: 1rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+*:focus,
+*:active {
+  outline: none;
+}
+
 /* Don't need the menu & menu close button on desktop - so hide */
 nav button {
   display: none;
@@ -173,6 +253,29 @@ nav .container ul li a {
   position: relative;
 }
 
+/* Dark mode btn */
+nav div ul button {
+  height: 100%;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: transparent;
+  transition: var(--transition);
+}
+
+nav div ul button:hover {
+  cursor: pointer;
+  transform: scale(130%);
+}
+
+nav div ul button img {
+  overflow: hidden;
+  filter: invert(29%) sepia(0%) saturate(20%) hue-rotate(184deg) brightness(97%)
+    contrast(80%);
+}
+
 nav .container ul li a:hover {
   color: var(--color-primary);
 }
@@ -189,7 +292,7 @@ nav ul li {
 
 nav .container ul li a.active {
   background: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
 /* ===== LANDING SECTION ===== */
@@ -204,9 +307,10 @@ section.landing {
 
 section.landing .container {
   display: grid;
-  /* This keeps the socials at 5rem, the main content at auto, and the profile pic at 26rem */
+  /* This keeps the socials at 5rem, the background content at auto, and the profile pic at 26rem */
   grid-template-columns: 5rem auto 26rem;
   gap: 2rem;
+  color: var(--color-text-paragraph);
 }
 
 section.landing .socials {
@@ -219,7 +323,7 @@ section.landing .socials {
 
 section.landing .socials a {
   font-size: 1.5rem;
-  background: var(--color-light);
+  background: var(--color-secondary-background);
   color: var(--color-dark);
   padding: 0.3rem;
   border-radius: 50%;
@@ -233,7 +337,7 @@ section.landing .socials a {
 
 section.landing .socials a:hover {
   background: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
 section.landing .info h1 {
@@ -280,7 +384,7 @@ section.landing .profile-area .outer-circle span {
   height: 4rem;
   border-radius: 50%;
   position: absolute;
-  background: var(--color-white);
+  background: var(--color-background);
   color: var(--color-primary);
   display: flex;
   align-items: center;
@@ -328,13 +432,14 @@ section.landing .profile-area .inner-circle img {
 
 /* ===== ABOUT ====== */
 section.about {
-  background: var(--color-light);
+  background: var(--color-secondary-background);
 }
 
 section.about .container {
   display: grid;
   grid-template-columns: 26rem auto;
   gap: 5rem;
+  color: var(--color-text-paragraph);
 }
 
 .img img {
@@ -383,20 +488,21 @@ section.skills .skill .head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--color-white);
+  color: var(--color-background);
   padding: 1.6rem;
   cursor: pointer;
   margin-bottom: 0.6rem;
 }
 
 section.skills .skill .head h4 {
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
 section.skills .skill .head .left {
   display: flex;
   align-items: center;
   gap: 1rem;
+  color: var(--color-whiteText);
 }
 
 .items {
@@ -414,7 +520,7 @@ section.skills .skill .head .left {
   align-items: start;
   gap: 1rem;
   padding: 1.6rem;
-  background-color: var(--color-light);
+  background-color: var(--color-secondary-background);
   margin-bottom: 0.3rem;
   transition: var(--transition);
 }
@@ -425,7 +531,7 @@ section.skills .skill .head .left {
   align-items: start;
   gap: 1rem;
   padding: 1.6rem;
-  background-color: var(--color-white);
+  background-color: var(--color-background);
   margin-bottom: 0.3rem;
 }
 
@@ -459,7 +565,7 @@ section.skills .skill .head .left {
 /* ===== SERVICES ===== */
 
 section.services {
-  background: var(--color-light);
+  background: var(--color-secondary-background);
 }
 
 section.services .container {
@@ -469,7 +575,7 @@ section.services .container {
 }
 
 .service {
-  background-color: var(--color-white);
+  background-color: var(--color-background);
   padding: 3rem 2rem;
   text-align: center;
   display: flex;
@@ -477,6 +583,7 @@ section.services .container {
   gap: 2rem;
   cursor: default;
   transition: var(--transition);
+  color: var(--color-text-paragraph);
 }
 
 .service:hover {
@@ -492,7 +599,7 @@ section.services .container {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
 .service:nth-of-type(2) span {
@@ -500,7 +607,7 @@ section.services .container {
 }
 
 .service:nth-of-type(3) span {
-  background: var(--color-secondary);
+  background: var(--color-secondary-background);
 }
 
 /* ===== END OF SERVICES ===== */
@@ -510,6 +617,7 @@ section.services .container {
   margin: auto;
   margin-bottom: 2rem;
   width: 65%;
+  color: var(--);
 }
 
 .recent-work .projects {
@@ -531,6 +639,7 @@ section.services .container {
 .project p,
 h2 {
   max-width: 70%;
+  color: var(--color-text-paragraph);
 }
 
 .thumbnail {
@@ -560,7 +669,7 @@ h2 {
 /* ===== TESTIMONIALS ===== */
 
 .testimonials {
-  background: var(--color-light);
+  background: var(--color-secondary-background);
   display: flex;
   flex-direction: column;
 }
@@ -576,13 +685,14 @@ section.testimonials .carousel {
 }
 
 .testimonial {
-  background: var(--color-white);
+  background: var(--color-background);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   font-size: 0.9rem;
   margin-bottom: 2rem;
+  color: var(--color-text-paragraph);
 }
 
 .testimonial .head {
@@ -609,6 +719,11 @@ section.testimonials .carousel {
 
 .fa-star {
   font-size: 1.2rem;
+}
+
+.fa-file-arrow-down {
+  margin-right: 0.5rem;
+  color: var(--color-whiteText);
 }
 
 /* .swiper-scrollbar {
@@ -650,12 +765,12 @@ section.contact {
 
 .contact .container h1 {
   margin: 0;
-  color: var(--color-white);
+  color: var(--color-whiteText);
 }
 
 .contact .container p {
   text-align: center;
-  color: var(--color-white);
+  color: var(--color-whiteText);
   opacity: 0.8;
   margin-top: 0.5rem;
 }
@@ -670,27 +785,27 @@ section.contact {
   width: 100%;
   margin: 0.5rem 0;
   padding: 1.6rem;
-  border: 1px solid var(--color-white);
+  border: 1px solid var(--color-whiteText);
   background: transparent;
-  color: var(--color-white);
+  color: var(--color-whiteText);
   transition: var(--transition);
 }
 
 .contact form input:focus,
 .contact form textarea:focus {
-  background: var(--color-white);
-  color: var(--color-dark-text);
+  background: var(--color-background);
+  color: var(--color-whiteText);
 }
 
 .contact form input::placeholder,
 .contact form textarea::placeholder {
-  color: var(--color-white);
+  color: var(--color-whiteText);
 }
 
 .contact form .btn {
   width: 14rem;
   /* border: none; */
-  /* background: var(--color-white); */
+  /* background: var(--color-background); */
   /* color: var(--color-dark-text); */
   margin: 2rem auto 0;
 }
@@ -698,7 +813,7 @@ section.contact {
 .contact form .btn:hover {
   background: var(--color-primary);
   cursor: pointer;
-  color: var(--color-white);
+  color: var(--color-whiteText);
 }
 
 .contact form textarea {
@@ -760,7 +875,7 @@ footer .container .socials {
 
 footer .container .socials a {
   font-size: 1.5rem;
-  background: var(--color-light);
+  background: var(--color-secondary-background);
   color: var(--color-dark);
   padding: 0.3rem;
   border-radius: 50%;
@@ -774,12 +889,12 @@ footer .container .socials a {
 
 footer .container .socials a:hover {
   background: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
 footer .copyright {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-background);
   text-align: center;
   margin-top: 5rem;
   margin-bottom: -10rem;
@@ -790,11 +905,10 @@ footer .copyright {
 
 footer .copyright a {
   text-decoration: none;
-  color: var(--color-white);
+  color: var(--color-background);
 }
 
-/* ===== MEDIA QUERIES (PHONE) ===== */
-
+/* ===== MEDIA QUERIES (phone) ===== */
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 2.2rem;
@@ -835,7 +949,7 @@ footer .copyright a {
     z-index: 2;
     width: 16rem;
     height: 100vh;
-    background: var(--color-white);
+    background: var(--color-background);
     box-shadow: 1rem 0 2rem var(--color-primary-light);
     display: none;
   }
@@ -976,6 +1090,10 @@ footer .copyright a {
   section.recent-work .container .projects {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+
+  .skills i {
+    color: var(--color-whiteText);
   }
 
   section.recent-work .container {
